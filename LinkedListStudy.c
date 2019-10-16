@@ -44,17 +44,20 @@ int main(void)
             printList(Head);
             break;
          case 2: // delete an element
-            // if list is not empty
+
+            //check if list is not empty, cannot delete from an empty list, if head does not equal null, there is data in the list.
             if (Head != NULL) { 
                printf("%s", "Enter character to be deleted: ");
-               scanf("\n%c", &item);
+               scanf("\n%c", &item); //read in what item user wants to be removed from list into variable "item".
 
                // if character is found, remove it
-               if (delete(&Head, item)) { // remove item
+               if (delete(&Head, item)) 
+               { // remove item
                   printf("%c deleted.\n", item);
                   printList(Head);
                } 
-               else {
+               else 
+               {
                   printf("%c not found.\n\n", item);
                } 
             } 
@@ -122,7 +125,7 @@ void insert(ListNode* *sPtr, char value)
    } 
 } 
 
-// delete a list element
+// delete a list element, Head pointer and value that the user input is passed to delete function
 char delete(ListNode* *sPtr, char value)
 { 
    // delete first node if a match is found
