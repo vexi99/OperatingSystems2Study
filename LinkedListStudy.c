@@ -25,7 +25,7 @@ void menu(void); //Prints the menu for the user
 
 int main(void)
 { 
-   ListNode* Head = NULL; // initially there are no nodes, HEAD is created and given a value of NULL
+   ListNode* Head = NULL; // initially there are no nodes, HEAD is created and given a value of NULL.
    char item; // char entered by user, will be added to list
 
    menu(); // display the menu
