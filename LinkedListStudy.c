@@ -46,22 +46,28 @@ int main(void)
          case 2: // delete an element
 
             //check if list is not empty, cannot delete from an empty list, if head does not equal null, there is data in the list.
-            if (Head != NULL) { 
+            if (Head != NULL) 
+            { 
                printf("%s", "Enter character to be deleted: ");
                scanf("\n%c", &item); //read in what item user wants to be removed from list into variable "item".
 
-               // if character is found, remove it
+               // if character is found, remove it, delete function is called, head pointer and item to be deleted is passed to the function.
                if (delete(&Head, item)) 
-               { // remove item
+               { 
+                  //item has been removed from the list. PrintList function is called to show user new list order.
                   printf("%c deleted.\n", item);
                   printList(Head);
                } 
+               
+               //else, the item was not found in the list and therefore could not be deleted.
                else 
                {
                   printf("%c not found.\n\n", item);
                } 
             } 
-            else {
+            //else, list is empty, as Head == NULL. cannot delete item from an empty list.
+            else 
+            {
                puts("List is empty.\n");
             } 
 
@@ -128,28 +134,31 @@ void insert(ListNode* *sPtr, char value)
 // delete a list element, Head pointer and value that the user input is passed to delete function
 char delete(ListNode* *sPtr, char value)
 { 
-   // delete first node if a match is found
-   if (value == (*sPtr)->data) { 
-      ListNode* tempPtr = *sPtr; 
-      *sPtr = (*sPtr)->nextPtr; 
-      free(tempPtr); 
-      return value;
+   // delete first node if a match is found, if user input value is equal to head pointer data, the lines of code are ran inside this IF statement
+   if (value == (*sPtr)->data) 
+   { 
+      ListNode* tempPtr = *sPtr; //tempPtr struct is created and pointed to head pointer, (ie the item to be deleted)
+      *sPtr = (*sPtr)->nextPtr; //head pointer is "moved" along to the next element in the list
+      free(tempPtr); //the memory allocated for tempPtr is freed, deleting it from memory.
+      return value; //value is returned to main.
    } 
-   else { 
-      ListNode* previousPtr = *sPtr;
-      ListNode* currentPtr = (*sPtr)->nextPtr;
 
-      
-      while (currentPtr != NULL && currentPtr->data != value) { 
-         previousPtr = currentPtr; 
-         currentPtr = currentPtr->nextPtr;  
+   else //the code in this else statement is ran if the first element in the list does not equal the item in which users wish to delete from the list.
+   { 
+      ListNode* previousPtr = *sPtr; //previousPtr struct created and given values of the head of the list
+      ListNode* currentPtr = (*sPtr)->nextPtr; //currentPtr struct created and given the values of the next element in the list, essentially pushing the list up to the next item.
+
+      while (currentPtr != NULL && currentPtr->data != value) //loop while currentPtr isnt equal to NULL and the data in currentPtr does not equal to the user inputted value, loop ends when correct match is found.
+      { 
+         previousPtr = currentPtr; //previousPtr given value of currentPtr
+         currentPtr = currentPtr->nextPtr; //currentPtr given value of nextPtr in list, moving the list along 
       } 
-
       
-      if (currentPtr != NULL) { 
-         ListNode* tempPtr = currentPtr;
-         previousPtr->nextPtr = currentPtr->nextPtr;
-         free(tempPtr);
+      if (currentPtr != NULL) //if statement triggered, if the currentPtr struct is not empty (ie has data), this is where the data will be deleted once the match is found
+      { 
+         ListNode* tempPtr = currentPtr; //tempPtr struct is created to temporeraily hold the data of the currentPtr struct
+         previousPtr->nextPtr = currentPtr->nextPtr; //nextPtr field in previousPtr is filled with data from the nextPtr field in the currentPtr struct, moving the list along by one
+         free(tempPtr); //the memory allocated for tempPtr is freed from the program, deleting it.
          return value;
       } 
    } 
