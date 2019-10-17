@@ -36,12 +36,13 @@ int main(void)
    // loop while user does not choose 3
    while (choice != 3) { 
 
-      switch (choice) { 
+      switch (choice) 
+      { 
          case 1:
-            printf("%s", "Enter a character: ");
+            printf("%s", "Enter a character: "); //character to be added to the list
             scanf("\n%c", &item);
-            insert(&Head, item); // insert item in list
-            printList(Head);
+            insert(&Head, item); // insert character to the list, Address of head pointer and the character variable are passed to the insert function
+            printList(Head); //print out the new linked list after the new character has been added.
             break;
          case 2: // delete an element
 
@@ -167,23 +168,25 @@ char delete(ListNode* *sPtr, char value)
 } 
 
 
-// print the list
+// print the current list to standard output
 void printList(ListNode* currentPtr)
 { 
    
-   if (currentPtr == NULL) {
+   if (currentPtr == NULL) 
+   {
       puts("List is empty.\n");
    } 
-   else { 
+   else 
+   { 
       puts("The list is:");
 
       // while not the end of the list
       while (currentPtr != NULL) { 
-         printf("%c --> ", currentPtr->data);
-         currentPtr = currentPtr->nextPtr;   
+         printf("%c --> ", currentPtr->data); //print the character stored in the currentPtr data section
+         currentPtr = currentPtr->nextPtr;   //currentPtr is moved along the list, "incrementing" it by one to the next element in the linked list.
       } 
 
-      puts("NULL\n");
+      puts("NULL\n"); //end of the list
    } 
 } 
 
