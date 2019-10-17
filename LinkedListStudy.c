@@ -1,14 +1,11 @@
 // Dietel and Dietel C programming ed 7 12.3
-// Inserting and deleting nodes in a list
-
-// this adapted version has most of the comments removed.
-// students are expected to inser their own commnents, 
+// Inserting and deleting nodes in to an ordered list.
 
 
 #include <stdio.h>
 #include <stdlib.h>
 
-// self-referential structure                       
+// self-referential structure                      
 struct listNode {                                      
    char data; // each listNode contains a character 
    struct listNode *nextPtr; // pointer to next node
@@ -38,6 +35,7 @@ int main(void)
 
       switch (choice) 
       { 
+         //insert value
          case 1:
             printf("%s", "Enter a character: "); //character to be added to the list
             scanf("\n%c", &item);

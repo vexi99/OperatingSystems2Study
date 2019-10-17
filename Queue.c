@@ -1,5 +1,7 @@
 // Fig. 12.13: fig12_13.c
 // Operating and maintaining a queue
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -22,8 +24,8 @@ void instructions(void);
 // function main begins program execution
 int main(void)
 { 
-   QueueNode* headPtr = NULL; // initialize headPtr
-   QueueNode* tailPtr = NULL; // initialize tailPtr
+   QueueNode* headPtr = NULL; // initialize headPtr struct for the head of the queue
+   QueueNode* tailPtr = NULL; // initialize tailPtr struct for the tail of the queue
    char item; // char input by user
 
    instructions(); // display the menu
@@ -77,49 +79,53 @@ void instructions(void)
 // insert a node at queue tail
 void enqueue(QueueNode* *headPtr, QueueNode* *tailPtr, char value)
 { 
-   QueueNode* newPtr; 
-    
-    newPtr= malloc(sizeof(QueueNode));
+   QueueNode* newPtr = malloc(sizeof(QueueNode)); //initialise struct newPtr
 
-   if (newPtr != NULL) { // is space available 
-      newPtr->data = value;
-      newPtr->nextPtr = NULL;
+   if (newPtr != NULL) // is space available 
+    { 
+      newPtr->data = value; //user inputted value is added to value field of struct
+      newPtr->nextPtr = NULL; //nextPtr is NULL as it is added to the end of a queue
 
       // if empty, insert node at head
-      if (isEmpty(*headPtr)) {
-         *headPtr = newPtr;
+      if (isEmpty(*headPtr)) //isEmpty function is called, if queue is empty, its inserted at the head
+      {
+         *headPtr = newPtr; //inserted at the head
       } 
-      else {
+      else //else if the queue is not empty, newPtr is placed After the current tailPtr, at the end of the queue
+      {
+         //next pointer after the current tail is the newPtr
          (*tailPtr)->nextPtr = newPtr;
       } 
 
-      *tailPtr = newPtr;
+      *tailPtr = newPtr; //now the newPtr is set to the tailPtr, meaning newPtr is now at the tail.
    } 
-   else {
+   else //no memory available 
+   {
       printf("%c not inserted. No memory available.\n", value);
    } 
 } 
 
-// remove node from queue head
+// remove node from queue head, as it is a queue, first in first out basis.
 char dequeue(QueueNode* *headPtr, QueueNode* *tailPtr)
 { 
-   char value = (*headPtr)->data;      
-   QueueNode* tempPtr = *headPtr;              
-   *headPtr = (*headPtr)->nextPtr;
+   char value = (*headPtr)->data; //value is set to the headPtr's data field.     
+   QueueNode* tempPtr = *headPtr; //tempPtr initialised and given headPtr's data             
+   *headPtr = (*headPtr)->nextPtr; //The headPtr is then "moved" along to the nextPtr in the list.
 
    // if queue is empty
-   if (*headPtr == NULL) {
+   if (*headPtr == NULL) 
+   {
       *tailPtr = NULL;
    } 
 
-   free(tempPtr);
+   free(tempPtr); //tempPtr is then freed from the memory in RAM, deleting it from the program
    return value;
 } 
 
 // return 1 if the queue is empty, 0 otherwise
 int isEmpty(QueueNode* headPtr)
 { 
-   return headPtr == NULL;
+   return headPtr == NULL; //headPtr == NULL is a check, not an assignment of NULL to headPtr.
 } 
 
 // print the queue
