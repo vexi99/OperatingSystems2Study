@@ -25,47 +25,38 @@ void main()
 
 void insert(ListNode* *sPtr, int val)
 {
-    ListNode* newPtr = malloc(sizeof(ListNode)); //new struct called newPtr created
+    ListNode* newPtr = malloc(sizeof(ListNode)); //memory allocated for new ListNode Structure
 
-    if (newPtr != NULL)
-    {
-        newPtr->value = val; //assign user input value to the structure
-        newPtr->nextPtr = NULL; //nextPtr points to NULL, as
+   if (newPtr != NULL) //if statement to check if newPtr has been created properly (ie has data/ pointer address appointed to it)
+   { 
+      newPtr->value = val; //value of char inputted by user is placed into newPtr
+      newPtr->nextPtr = NULL; //nextPtr pointed to NULL
 
-        //create new structs, previousPtr and currentPtr
-        ListNode* previousPtr = NULL;
-        ListNode* currentPtr = NULL; 
+      ListNode* previousPtr = NULL; //previousPtr node Created, pointed to NULL
+      ListNode* currentPtr = *sPtr; //currentPtr node Created, pointed to sPtr which is the "Head" of the List
 
-        //while loop to find the space to input the value in correctly in ascending order.
-        while(currentPtr != NULL && val > currentPtr->value)
-        {
-            previousPtr = currentPtr;
-            currentPtr = currentPtr->nextPtr;
-        }
+      //while currentPtr isnt equal to NULL(Has Data) and Value is greater than the data of currentPtr (this while loop is to have an ordered List)            
+      while (currentPtr != NULL && val > currentPtr->value)  
+      {
+         previousPtr = currentPtr; //PreviousPtr is turned into the currentPtr            
+         currentPtr = currentPtr->nextPtr; //CurrentPtr is turned into nextPtr, these two lines of code essentially "push" the location where the node will be inserted along, until correct position is found
+      }                                          
 
-        if(previousPtr == NULL)
-        {
-            newPtr->nextPtr = *sPtr;
-            *sPtr = newPtr;
-        }
-        //insert new node between currentPtr and previousPtr
-        else
-        {
-            /* this segment of code inserts newPtr inbetween previousPtr and currentPtr, by making previous point to newPtr and then newPtr point to currentPtr */
-            previousPtr->nextPtr = newPtr;
-            newPtr->nextPtr = currentPtr;
-        }
-        
-
-
-    }
-    else
-    {
-        //Code for failure to create struct.
-        printf("Not enough memory to create the list.");
-    }
-    
-
+      //insert new node at beginning of list, head is made point towards the nextPtr and Head is also given the data of the newPtr
+      if (previousPtr == NULL) { 
+         newPtr->nextPtr = *sPtr; //the nextPtr is pointed towards the Head of the list
+         *sPtr = newPtr; //The head of the list is then given to newPtr
+      } 
+      //insert new node between previousPtr and currentPtr
+      else {
+         previousPtr->nextPtr = newPtr;//the "previous" item's nextPtr field in the list is pointed towards the new item which is just added to the list
+         newPtr->nextPtr = currentPtr;//The new item's nextPtr field is pointed towards the currentPtr in the list
+         // List is now changed from "previousPtr->currentPtr" to "previousPtr->newPtr->currentPtr" essentially as newPtr is placed between them.
+      } 
+   } 
+   else { //if newPtr does equal NULL, value has not been correctly inserted to the list.
+      printf("%c not inserted. No memory available.\n", val);
+   } 
 }
 
 void menu(void)

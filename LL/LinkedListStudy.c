@@ -106,8 +106,8 @@ void insert(ListNode* *sPtr, char value)
       ListNode* previousPtr = NULL; //previousPtr node Created, pointed to NULL
       ListNode* currentPtr = *sPtr; //currentPtr node Created, pointed to sPtr which is the "Head" of the List
 
-            
-      while (currentPtr != NULL && value > currentPtr->data) //while currentPtr isnt equal to NULL(Has Data) and Value is greater than the data of currentPtr (this while loop is to have an ordered List) 
+      //while currentPtr isnt equal to NULL(Has Data) and Value is greater than the data of currentPtr (this while loop is to have an ordered List)            
+      while (currentPtr != NULL && value > currentPtr->data)  
       {
          previousPtr = currentPtr; //PreviousPtr is turned into the currentPtr            
          currentPtr = currentPtr->nextPtr; //CurrentPtr is turned into nextPtr, these two lines of code essentially "push" the location where the node will be inserted along, until correct position is found
