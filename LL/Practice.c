@@ -39,7 +39,11 @@ void push(StackNode* *headPtr, int info)
 
 int pop(StackNode* *headPtr)
 {
-   
+   StackNode* tempPtr = *headPtr;
+   int poppedVal = (*headPtr)->value;
+   *headPtr = (*headPtr)->nextPtr;
+   free(tempPtr);
+   return poppedVal;
 }
 
 void menu(void)
