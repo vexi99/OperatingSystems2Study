@@ -12,7 +12,8 @@ struct stackNode {
 typedef struct stackNode StackNode;
 //prototypes
 void menu(void);
-void push(StackNode* *headPtr, int val);
+void push(StackNode* *headPtr, int info);
+int pop(StackNode* *headPtr);
 
 void main()
 {
@@ -20,7 +21,23 @@ void main()
 
 }
 
-void push(StackNode* *headPtr, int val)
+void push(StackNode* *headPtr, int info)
+{
+   StackNode* newPtr = malloc(sizeof(StackNode));
+
+   if (newPtr != NULL)
+   {
+      newPtr->value = info; //user inputted info is placed in value field
+      newPtr->nextPtr = *headPtr; //newPtr's nextPtr is pointed to the current top of the stack
+      *headPtr = *newPtr; //newPtr's data is then assigned to the headPtr field, becoming the head of the stack.
+   }
+   else
+   {
+      printf("Not created properly");
+   }
+}
+
+int pop(StackNode* *headPtr)
 {
    
 }

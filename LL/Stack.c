@@ -82,7 +82,7 @@ void push(StackNode* *topPtr, int info)
    if (newPtr != NULL) 
    {           
       newPtr->data = info; //user inputted data inserted into newPtr           
-      newPtr->nextPtr = *topPtr; //newPtr pointed to the top of the stack
+      newPtr->nextPtr = *topPtr; //newPtr's nextPtr field is pointed to the current top of the stack
       *topPtr = newPtr; //newPtr placed inside topPtr
    }                     
    else 
