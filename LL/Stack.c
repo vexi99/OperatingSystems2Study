@@ -76,15 +76,17 @@ void instructions(void)
 // insert a node at the stack top
 void push(StackNode* *topPtr, int info)
 { 
-   StackNode* newPtr = malloc(sizeof(StackNode));
+   StackNode* newPtr = malloc(sizeof(StackNode)); //initialise new struct called newPtr
 
-   // insert the node at stack top
-   if (newPtr != NULL) {           
-      newPtr->data = info;           
-      newPtr->nextPtr = *topPtr;     
-      *topPtr = newPtr;              
+   // insert the node at stack top, if statement to check if newPtr was created correctly
+   if (newPtr != NULL) 
+   {           
+      newPtr->data = info; //user inputted data inserted into newPtr           
+      newPtr->nextPtr = *topPtr; //newPtr pointed to the top of the stack
+      *topPtr = newPtr; //newPtr placed inside topPtr
    }                     
-   else { // no space available
+   else 
+   { // no space available
       printf("%d not inserted. No memory available.\n", info);
    } 
 } 
@@ -92,11 +94,11 @@ void push(StackNode* *topPtr, int info)
 // remove a node from the stack top
 int pop(StackNode* *topPtr)
 { 
-   StackNode* tempPtr = *topPtr;             
-   int popValue = (*topPtr)->data;  
-   *topPtr = (*topPtr)->nextPtr;
-   free(tempPtr);               
-   return popValue;
+   StackNode* tempPtr = *topPtr; //topPtr's current data placed into tempPtr for temporary storage        
+   int popValue = (*topPtr)->data;  //variable popValue created to store the data being popped off of the stack
+   *topPtr = (*topPtr)->nextPtr; //topPtr is then "moved" along to the new top of the stack
+   free(tempPtr); //tempPtr is then freed "deleting" it 
+   return popValue; //value of whats been popped from the stack is then returned to main
 } 
 
 // print the stack
