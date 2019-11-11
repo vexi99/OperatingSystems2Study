@@ -14,6 +14,7 @@ typedef struct stackNode StackNode;
 void menu(void);
 void push(StackNode* *headPtr, int info);
 int pop(StackNode* *headPtr);
+void printStack(StackNode* *headPtr);
 
 void main()
 {
@@ -44,6 +45,11 @@ int pop(StackNode* *headPtr)
    *headPtr = (*headPtr)->nextPtr;
    free(tempPtr);
    return poppedVal;
+}
+
+void printStack(StackNode* *headPtr)
+{
+   
 }
 
 void menu(void)
