@@ -23,18 +23,21 @@ void *PrintHello(void *threadid)
 
 int main(int argc, char *argv[])
 {
-pthread_t threads[NUM_THREADS];
-int rc;
-long t;
+   pthread_t threads[NUM_THREADS];
+   int rc;
+   long t;
 
-for(t=0;t<NUM_THREADS;t++) {
-  printf("Creating thread %ld\n", t);
-  rc = pthread_create(&threads[t], NULL, PrintHello, (void *) &t);
-  if (rc) {
-    printf("ERROR; return code from pthread_create() is %d\n", rc);
-    exit(-1);
-    }
+   for(t=0;t<NUM_THREADS;t++) 
+   {
+      printf("Creating thread %ld\n", t);
+      rc = pthread_create(&threads[t], NULL, PrintHello, (void *) &t); //unsafe passing of variable t
+      /* This is caused by the &t, variable is passed by reference, not value */
+      if (rc) 
+      {
+         printf("ERROR; return code from pthread_create() is %d\n", rc);
+         exit(-1);
+      }
    }
 
-pthread_exit(NULL);
+   pthread_exit(NULL);
 }
