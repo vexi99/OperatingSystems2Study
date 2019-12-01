@@ -23,7 +23,7 @@ void *PrintHello(void *threadid)
 
 int main(int argc, char *argv[])
 {
-  pthread_t threads[NUM_THREADS];
+  pthread_t threads[NUM_THREADS]; //threads[20]
 
   int rc;
   long t;
